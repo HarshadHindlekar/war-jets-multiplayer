@@ -545,7 +545,7 @@ export default function Game() {
 
     myIdRef.current=peer.id
     const hostId=`warjets-${code.toUpperCase()}`
-    const conn=peer.connect(hostId,{reliable:true,serialization:'none'})
+    const conn=peer.connect(hostId,{reliable:true,serialization:'json'})
     connsRef.current.set(hostId,conn)
 
     conn.on('error',()=>setError('Could not connect to room. Check the code.'))
