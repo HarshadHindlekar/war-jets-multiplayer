@@ -1,12 +1,18 @@
 import type { NextConfig } from 'next'
 
+const isGithubPages = process.env.GITHUB_ACTIONS === 'true'
+const repoName = 'war-jets-multiplayer'
+
 const nextConfig: NextConfig = {
   output: 'export',          // Static HTML export — works on GitHub Pages
   reactStrictMode: false,
   images: { unoptimized: true },
-  // If deployed to a sub-path like /war--jets-multiplayer/ set basePath:
-  // basePath: '/war--jets-multiplayer',
-  // assetPrefix: '/war--jets-multiplayer/',
+  ...(isGithubPages
+    ? {
+        basePath: `/${repoName}`,
+        assetPrefix: `/${repoName}/`,
+      }
+    : {}),
   trailingSlash: true,
 }
 
